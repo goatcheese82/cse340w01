@@ -1,0 +1,17 @@
+nav {
+   background-color: var(--main);
+   color: var(--secondary);
+}
+
+ul {
+   display: flex;
+   flex-direction: row;
+   justify-content: space-between;
+   list-style-type: none;
+   padding: 5px;
+}
+
+li {
+   padding: 2px 5%;
+   font-family: var(--primary-font);
+}

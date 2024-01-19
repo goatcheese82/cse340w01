@@ -1,0 +1,16 @@
+header {
+   font-family: var(--primary-font);
+   display: flex;
+   background-color: var(--secondary);
+   color: var(--main);
+   justify-content: space-between;
+}
+
+.siteName {
+   font-size: var(--large-font-size);
+}
+
+a {
+   text-decoration: none;
+   color: var(--main);
+}

@@ -1,0 +1,11 @@
+<link rel="stylesheet" href="/css/vehicle/vehicle.css">
+<link rel="stylesheet" href="/css/vehicle/mobile.css" media="only screen and (max-width: 700px)">
+<% const vehicle = {title: "DMC Delorean", upgrades: [{title: "Flux Capacitor", url: "/images/upgrades/flux-cap.png", alt: "Flux Image"}, {title: "Flame Decals", url: "/images/upgrades/flame.jpg", alt: "Flames"}, {title: "Bumper Stickers", url: "/images/upgrades/bumper_sticker.jpg", alt: "Bumper Sticker Image"}, {title: "Hub Caps", url: "/images/upgrades/hub-cap.jpg", alt: "Hub Cap Image"}], reviews: [`"So fast it's almost like traveling in time." (4/5)`, `"Coolest ride on the road." (4/5)`, `"I'm feeling McFly!" (5/5)`, `"The most futuristic ride of our day." (4.5/5)`, `"80's livin and I love it!" (5/5)`], features: ["3 Cup holders", "Superman doors", "Fuzzy dice!"]}%>
+<div class="vehicle">
+  <div class="vehicleDisplay">
+    <%- include('./vehicle/cta.ejs', {vehicle})%>
+    <img src="/images/vehicles/delorean.jpg" alt="delorean"/>
+  </div>
+  <%- include('./vehicle/reviews.ejs', {vehicle})%>
+  <%- include('./vehicle/upgrades.ejs', {vehicle})%>
+</div>

@@ -1,0 +1,31 @@
+:root {
+  --accent: #01b0d3;
+  --main: black;
+  --secondary: white;
+  --default-font-size: 1em;
+  --large-font-size: 2em;
+  --primary-font: Arial, Helvetica, sans-serif;
+}
+
+/******* Change Box Model ***************/
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+
+html {
+  background-image: url("/images/site/checkerboard.jpg");
+}
+
+body {
+  background-color: var(--secondary);
+  border: 5px solid var(--accent);
+  border-radius: 10px;
+  padding: 1%;
+  margin: 2% 10%;
+}
+
+footer {
+  font-family: var(--primary-font);
+}

@@ -1,0 +1,110 @@
+/* Vehicle */
+
+.vehicle {
+   display: grid;
+   justify-content: space-between;
+   grid-template-columns: 1fr 1fr;
+   grid-template-rows: 1fr 1fr;
+}
+
+/* Vehicle Display */
+
+.vehicleDisplay {
+   display: grid;
+   grid-template-columns: repeat(6, 1fr);
+   grid-template-rows: repeat(3, 1fr);
+   grid-column: 1 / 3;
+   grid-row: 1 / 2;
+   align-items: center;
+}
+
+.cta {
+   display: flex;
+   flex-direction: column;
+   color: var(--accent);
+   grid-row: 1 / 3;
+   grid-column: 2 / 3;
+   z-index: 99;
+   background-color: rgba(255,255,255, .5);
+   padding: 3px;
+}
+
+.cta h2 {
+   padding: 0;
+   margin: 0;
+}
+
+.cta ul {
+   padding: 0;
+   display: flex;
+   flex-direction: column;
+}
+
+.cta button {
+   font-size: 1.5em;
+   background-color: var(--accent);
+   padding: 5%;
+   margin: auto;
+}
+
+.vehicleDisplay img {
+   grid-column: 2 / 6;
+   grid-row: 1 / 4;
+   width: 100%;
+}
+
+/* Upgrades */
+
+.upgrades {
+   grid-column: 1 / 2;
+   grid-row: 2 / 3;
+}
+
+.upgradesContainer {
+   display: grid;
+   grid-template-columns: 1fr 1fr;
+   grid-template-rows: 1fr 1fr;
+   text-align: center;
+}
+
+.upgradeContainer {
+   display: flex;
+   flex-direction: column;
+   text-align: center;
+   padding: 0;
+}
+
+.upgradeContainer a {
+   margin: auto;
+   display: flex;
+   padding: 0;
+   text-align: center;
+   text-decoration: underline;
+   color: blue;
+}
+
+.upgradeTile {
+   margin: auto;
+   background-color: var(--accent);
+   width: 80%;
+   height: 80%;
+   padding: 5% 20%;
+   border: 1px solid var(--main);
+}
+
+/* Reviews */
+
+.vehicleReviews {
+   grid-column: 2 / 3;
+   grid-row: 2 / 3;
+}
+
+.vehicleReviews ul {
+   display: flex;
+   flex-direction: column;
+   list-style-type: disc;
+}
+
+.vehicleReviews li {
+   padding: 10px 0;
+}
