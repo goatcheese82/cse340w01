@@ -15,3 +15,7 @@ li {
    padding: 2px 5%;
    font-family: var(--primary-font);
 }
+
+nav a {
+   color: white;
+}
