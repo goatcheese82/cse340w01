@@ -2,3 +2,12 @@
    display: grid;
    grid-template-columns: 1fr 1fr;
 }
+
+.vehicleDetail img {
+   width: 100%;
+   padding: 5%;
+}
+
+.vehicleDetailInfo {
+   padding: 2%;
+}

@@ -1,0 +1,4 @@
+.vehicleDetail {
+   display: flex;
+   flex-direction: column;
+}
