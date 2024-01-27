@@ -1,0 +1,4 @@
+#inv-display {
+   display: flex;
+   flex-wrap: wrap;
+}
