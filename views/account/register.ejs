@@ -1,0 +1,28 @@
+<link rel="stylesheet" href="/css/account/login.css">
+<% if (title) { %>
+<h1><%= title %></h1>
+<% } else {
+  res.redirect('/')
+} %>
+
+<%- messages() %>
+
+<div class="loginForm">
+  <form id="registerForm" action="/account/register" method="post">
+    <label for="account_firstname">First Name:</label>
+    <input type="text" id="account_firstname" name="account_firstname">
+    <label for="account_lastname">Last Name:</label>
+    <input type="text" id="account_lastname" name="account_lastname">
+    <label for="account_email">Email:</label>
+    <input type="email" id="account_email" name="account_email">
+    <label for="account_password">Password:</label>
+    <input type="password" id="account_password" name="account_password">
+    <input type="submit" value="Register">
+  </form>
+  <div class="passwordRequirements">
+    <p>All inputs are required</p>
+    <p>Your password must contain:</p>
+    <p>1 capital letter, 1 number, and 1 special character</p>
+    <p>Your password should be at least 12 characters</p>
+  </div>
+</div>

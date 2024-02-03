@@ -29,3 +29,19 @@ body {
 footer {
   font-family: var(--primary-font);
 }
+
+/***** MESSAGES *****/
+
+.notice {
+  background-color: green;
+  color: white;
+}
+
+.warning {
+  background-color: yellow;
+}
+
+.error {
+  background-color: red;
+  color: white;
+}

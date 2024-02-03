@@ -1,0 +1,44 @@
+.loginForm {
+   display: flex;
+   flex-direction: column;
+   background-color: #32475c;
+   color: white;
+   text-align: center;
+   width: 50%;
+   margin: auto;
+   border: 3px solid #a3978e;
+   border-radius: 4px;
+   font-size: 1.5em;
+   font-family: var(--primary-font);
+}
+
+form {
+   padding: 10%;
+   display: flex;
+   flex-direction: column;
+   justify-content: space-between;
+   text-align: left;
+}
+
+input {
+   padding: 10px;
+   margin: 0px 0px 15px 0px;
+}
+
+input[type=submit] {
+   width: 25%;
+   background-color: white;
+   border-radius: 20px;
+   margin:  10px auto;
+   text-transform: uppercase;
+}
+
+a {
+   color: white;
+   text-decoration: underline;
+}
+
+.passwordRequirements {
+   font-size: .5em;
+}
+
