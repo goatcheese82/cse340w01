@@ -1,0 +1,25 @@
+<link rel="stylesheet" href="/css/vehicle/detail.css">
+<link rel="stylesheet" href="/css/vehicle/mobileDetail.css" media="only screen and (max-width: 700px)">
+<%# if (title) { %>
+<h1><%= title %></h1>
+<%# } else {
+  res.redirect('/')
+} %>
+
+<%- messages() %>
+
+<form id="addVehicleForm" action="" method="post">
+  <label for="classification_name">Classification:</label>
+  <select name="classification_name" id="classificationName">
+  </select>
+  <input type="text" id="invMake" name="inv_make" require>
+  <input type="text" id="invModel" name="inv_model" require>
+  <textarea id="invDescription" name="inv_description" require></textarea>
+  <input type="text" id="invImage" name="inv_image" require>
+  <input type="text" id="invThumbnail" name="inv_thumbnail" require>
+  <input type="number" id="invPrice" name="inv_price" require>
+  <input type="year" id="invYear" name="inv_year" require>
+  <input type="number" id="invMiles" name="inv_miles" require>
+  <input type="text" id="invColor" name="inv_color" require>
+  <input type="submit" value="Add Vehicle"/>
+</form>
