@@ -15,8 +15,9 @@ const inventoryRoute = require("./routes/inventoryRoute")
 const accountRoute = require("./routes/accountRoute")
 const expressLayouts = require("express-ejs-layouts")
 const baseController = require("./controllers/baseController")
-const utilities = require("./utilities/index")
+const utilities = require("./utilities/")
 const bodyParser = require("body-parser")
+const cookieParser = require("cookie-parser")
 
 /* ***********************
  * Middleware
@@ -82,6 +83,8 @@ app.use(async (err, req, res, next) => {
     errors: null
   })
 })
+
+app.use(utilities.checkJWTToken)
 
 /* ***********************
  * Local Server Information
