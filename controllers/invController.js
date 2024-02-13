@@ -67,19 +67,21 @@ invCont.addClassification = async function (req, res, next) {
  * Display Add Vehicle View
    *************************/
 invCont.addVehicle = async function (req, res, next) {
-  const classifications = await invModel.getClassifications()
+  let classifications = await invModel.getClassifications()
   let nav = await utilities.getNav()
+  let classOptions = await utilities.buildClassificationOptions()
   res.render("./inventory/addVehicle", {
     title: "Add New Vehicle",
     nav,
     classifications,
+    classOptions,
     errors: null
   })
 }
 
 
 /* *************************
- * Add Classification
+ * Add Vehicle
    *************************/
 invCont.createVehicle = async function (req, res, next) {
   let nav = await utilities.getNav()
@@ -101,6 +103,34 @@ invCont.createVehicle = async function (req, res, next) {
   } else {
     req.flash("error", "Sorry, your classification was not created.")
     res.status(501).render("inv/addClassification", {
+      title: "Add New Classification",
+      nav
+    })
+  }
+}
+/* *************************
+ * Add Classification
+   *************************/
+invCont.createClassification = async function (req, res, next) {
+  let nav = await utilities.getNav()
+  const { classification_name } = req.body
+
+  const createResult = await invModel.addClassification(
+    classification_name
+  )
+
+  if (createResult) {
+    req.flash(
+      "notice",
+      `${classification_name} is now a classification.`
+    )
+    res.status(201).render("inventory/addClassification", {
+      title: "Add New Classification",
+      nav
+    })
+  } else {
+    req.flash("error", "Sorry, your classification was not created.")
+    res.status(501).render("inventory/addClassification", {
       title: "Add New Classification",
       nav
     })

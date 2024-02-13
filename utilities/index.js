@@ -60,12 +60,27 @@ Util.buildClassificationGrid = async function (data) {
 }
 
 /* **************************************
+* Build the classification options
+* ************************************ */
+
+Util.buildClassificationOptions = async function (req, res, next) {
+  let data = await invModel.getClassifications()
+  let dropdown = '<select name="classification_name" id="classificationName">'
+  data.rows.forEach((row) => {
+    dropdown += `<option value=${row.classification_id}>${row.classification_name}</option>`
+  })
+  dropdown += '</select>'
+  return dropdown
+}
+
+
+/* **************************************
 * Build the inventory detail view HTML
 * ************************************ */
 Util.buildInventoryDetail = async function (data) {
   let detail
   const vehicle = data[0]
-  let price = new Intl.NumberFormat('en-us', { style: 'currency', currency: 'USD',}).format(vehicle.inv_price)
+  let price = new Intl.NumberFormat('en-us', { style: 'currency', currency: 'USD', }).format(vehicle.inv_price)
   let mileage = vehicle.inv_miles.toLocaleString('en-US')
   if (data.length > 0) {
     detail = '<div class="vehicleDetail">'
@@ -83,6 +98,7 @@ Util.buildInventoryDetail = async function (data) {
   return detail
 }
 
+
 /* ****************************************
  * Middleware For Handling Errors
  * Wrap other function in this for 
@@ -95,28 +111,28 @@ Util.handleErrors = fn => (req, res, next) => Promise.resolve(fn(req, res, next)
 **************************************** */
 Util.checkJWTToken = (req, res, next) => {
   if (req.cookies.jwt) {
-   jwt.verify(
-    req.cookies.jwt,
-    process.env.ACCESS_TOKEN_SECRET,
-    function (err, accountData) {
-     if (err) {
-      req.flash("Please log in")
-      res.clearCookie("jwt")
-      return res.redirect("/account/login")
-     }
-     res.locals.accountData = accountData
-     res.locals.loggedin = 1
-     next()
-    })
+    jwt.verify(
+      req.cookies.jwt,
+      process.env.ACCESS_TOKEN_SECRET,
+      function (err, accountData) {
+        if (err) {
+          req.flash("Please log in")
+          res.clearCookie("jwt")
+          return res.redirect("/account/login")
+        }
+        res.locals.accountData = accountData
+        res.locals.loggedin = 1
+        next()
+      })
   } else {
-   next()
+    next()
   }
- }
+}
 
- /* ****************************************
- *  Check Login
- * ************************************ */
- Util.checkLogin = (req, res, next) => {
+/* ****************************************
+*  Check Login
+* ************************************ */
+Util.checkLogin = (req, res, next) => {
   if (res.locals.loggedin) {
     console.log("Success")
     next()
@@ -124,6 +140,6 @@ Util.checkJWTToken = (req, res, next) => {
     req.flash("notice", "Please log in.")
     return res.redirect("/account/login")
   }
- }
+}
 
 module.exports = Util

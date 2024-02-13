@@ -10,8 +10,7 @@
 
 <form id="addVehicleForm" action="" method="post">
   <label for="classification_name">Classification:</label>
-  <select name="classification_name" id="classificationName">
-  </select>
+  <%- classOptions %>
   <input type="text" id="invMake" name="inv_make" require>
   <input type="text" id="invModel" name="inv_model" require>
   <textarea id="invDescription" name="inv_description" require></textarea>
