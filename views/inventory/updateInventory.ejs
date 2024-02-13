@@ -1,0 +1,34 @@
+<link rel="stylesheet" href="/css/vehicle/detail.css">
+<link rel="stylesheet" href="/css/vehicle/mobileDetail.css" media="only screen and (max-width: 700px)">
+<%# if (title) { %>
+<h1><%= title %></h1>
+<%# } else {
+  res.redirect('/')
+} %>
+
+<%- messages() %>
+
+<%= inv_make%>
+<form id="updateInventoryForm" action="/inv/update" method="post">
+  <label for="classification_name">Classification:</label>
+  <%- classOptions %>
+  <label for="inv_make">Make:</label>
+  <input type="text" id="invMake" name="inv_make" value="<%=inv_make%>" require>
+  <label for="inv_model">Model:</label>
+  <input type="text" id="invModel" name="inv_model" value="<%= inv_model %>" require>
+  <label for="inv_description">Details:</label>
+  <textarea id="invDescription" name="inv_description" value="<%= inv_description %>" require><%=inv_description%></textarea>
+  <label for="inv_image">Image:</label>
+  <input type="text" id="invImage" name="inv_image" value="<%= inv_image %>" require>
+  <label for="inv_thumbnail">Thumbnail:</label>
+  <input type="text" id="invThumbnail" name="inv_thumbnail" value="<%= inv_thumbnail %>"require>
+  <label for="inv_price">Price:</label>
+  <input type="number" id="invPrice" name="inv_price" value="<%= inv_price %>" require>
+  <label for="inv_year">Year:</label>
+  <input type="year" id="invYear" name="inv_year" value="<%= inv_year %>" require>
+  <label for="inv_miles">Miles:</label>
+  <input type="number" id="invMiles" name="inv_miles" value="<%= inv_miles %>" require>
+  <label for="inv_color">Color:</label>
+  <input type="text" id="invColor" name="inv_color" value="<%= inv_color %>" require>
+  <input type="submit" value="Update Inventory"/>
+</form>

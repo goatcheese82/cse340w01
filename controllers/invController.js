@@ -64,13 +64,13 @@ invCont.addClassification = async function (req, res, next) {
 
 
 /* *************************
- * Display Add Vehicle View
+ * View: Add Inventory
    *************************/
-invCont.addVehicle = async function (req, res, next) {
+invCont.addInventory = async function (req, res, next) {
   let classifications = await invModel.getClassifications()
   let nav = await utilities.getNav()
   let classOptions = await utilities.buildClassificationOptions()
-  res.render("./inventory/addVehicle", {
+  res.render("./inventory/addInventory", {
     title: "Add New Vehicle",
     nav,
     classifications,
@@ -79,9 +79,8 @@ invCont.addVehicle = async function (req, res, next) {
   })
 }
 
-
 /* *************************
- * Add Vehicle
+ * Action: Add Inventory
    *************************/
 invCont.createVehicle = async function (req, res, next) {
   let nav = await utilities.getNav()
@@ -108,8 +107,39 @@ invCont.createVehicle = async function (req, res, next) {
     })
   }
 }
+
+
 /* *************************
- * Add Classification
+ * Get: Update Inventory
+   *************************/
+invCont.updateInventory = async function (req, res, next) {
+  const inventory_id = parseInt(req.params.inventoryId)
+  let nav = await utilities.getNav()
+  let Data = await invModel.getInventoryByInventoryId(inventory_id)
+  let itemData = Data[0]
+  console.log(itemData.inv_description)
+  let classOptions = await utilities.buildClassificationOptions()
+  const itemName = `${itemData.inv_make} ${itemData.inv_model}`
+  res.render("./inventory/updateInventory", {
+    title: `Update ${itemData.inv_model}`,
+    nav,
+    classOptions,
+    errors: null,
+    inv_id: itemData.inv_id,
+    inv_make: itemData.inv_make,
+    inv_model: itemData.inv_model,
+    inv_year: itemData.inv_year,
+    inv_description: itemData.inv_description,
+    inv_image: itemData.inv_image,
+    inv_thumbnail: itemData.inv_thumbnail,
+    inv_price: itemData.inv_price,
+    inv_miles: itemData.inv_miles,
+    inv_color: itemData.inv_color,
+    classification_id: itemData.classification_id
+  })
+}
+/* *************************
+ * Post: Add Classification
    *************************/
 invCont.createClassification = async function (req, res, next) {
   let nav = await utilities.getNav()

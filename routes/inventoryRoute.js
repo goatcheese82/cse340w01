@@ -11,17 +11,21 @@ router.get("/detail/:inventoryId", handleErrors(invController.buildByInventoryId
 // Route to management page
 router.get("/", handleErrors(invController.getManagement));
 
-// Route to Add new Classification
-router.get("/addClassification", handleErrors(invController.addClassification));
+// Create Classification
+/*view*/router.get("/addClassification", handleErrors(invController.addClassification));
+/*action*/router.post("/addClassification", handleErrors(invController.createClassification));
 
-// Route to Create new Classification
-router.post("/addClassification", handleErrors(invController.createClassification));
+// Route:View: Create Inventory
+router.get("/addInventory", handleErrors(invController.addInventory));
+router.get("/updateInventory/:inventoryId", handleErrors(invController.updateInventory));
 
-// Route to Add new vehicle Form
-router.get("/addVehicle", handleErrors(invController.addVehicle));
+// Route: Create Inventory
+router.post("/addInventory", handleErrors(invController.createVehicle));
 
-// Route to Create new vehicle
-router.post("/addVehicle", handleErrors(invController.createVehicle));
+// Delete Inventory
+
+router.get("/deleteInventory/:inventoryId", handleErrors(invController.deleteInventoryView));
+router.post("/deleteInventory/:inventoryId", handleErrors(invController.deleteInventory));
 
 
 module.exports = router;
