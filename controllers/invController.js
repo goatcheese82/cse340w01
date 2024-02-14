@@ -38,10 +38,11 @@ invCont.buildByInventoryId = async function (req, res, next) {
 }
 
 /* *************************
- * Display Management View
+ * View: Inventory Management
    *************************/
 invCont.getManagement = async function (req, res, next) {
   let nav = await utilities.getNav()
+  const classificationSelect = await utilities.buildClassificationOptions()
   res.render("./inventory/management", {
     title: "Vehicle Management",
     nav,
@@ -117,11 +118,10 @@ invCont.updateInventory = async function (req, res, next) {
   let nav = await utilities.getNav()
   let Data = await invModel.getInventoryByInventoryId(inventory_id)
   let itemData = Data[0]
-  console.log(itemData.inv_description)
   let classOptions = await utilities.buildClassificationOptions()
   const itemName = `${itemData.inv_make} ${itemData.inv_model}`
   res.render("./inventory/updateInventory", {
-    title: `Update ${itemData.inv_model}`,
+    title: `Update ${itemName}`,
     nav,
     classOptions,
     errors: null,
