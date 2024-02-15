@@ -8,6 +8,8 @@ const { handleErrors } = require("../utilities");
 router.get("/type/:classificationId", handleErrors(invController.buildByClassificationId));
 router.get("/detail/:inventoryId", handleErrors(invController.buildByInventoryId));
 
+router.get("/getInventory/:classification_id", handleErrors(invController.getInventoryJSON));
+
 // Route to management page
 router.get("/", handleErrors(invController.getManagement));
 

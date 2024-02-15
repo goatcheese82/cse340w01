@@ -45,14 +45,28 @@ invCont.getManagement = async function (req, res, next) {
   const classificationSelect = await utilities.buildClassificationOptions()
   res.render("./inventory/management", {
     title: "Vehicle Management",
+    classificationSelect,
     nav,
     errors: null
   })
 }
 
+/* ***************************
+ *  Return Inventory by Classification As JSON
+ * ************************** */
+invCont.getInventoryJSON = async (req, res, next) => {
+  const classification_id = parseInt(req.params.classification_id)
+  const invData = await invModel.getInventoryByClassificationId(classification_id)
+  if (invData[0].inv_id) {
+    return res.json(invData)
+  } else {
+    next(new Error("No data returned"))
+  }
+}
+
 
 /* *************************
- * Display Add Classification View
+ * View: Add Classification
    *************************/
 invCont.addClassification = async function (req, res, next) {
   let nav = await utilities.getNav()
@@ -62,6 +76,8 @@ invCont.addClassification = async function (req, res, next) {
     errors: null
   })
 }
+
+
 
 
 /* *************************
@@ -138,6 +154,8 @@ invCont.updateInventory = async function (req, res, next) {
     classification_id: itemData.classification_id
   })
 }
+
+
 /* *************************
  * Post: Add Classification
    *************************/
