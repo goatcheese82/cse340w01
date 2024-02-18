@@ -1,10 +1,23 @@
 <div class="vehicleReviews">
-  <h2><%=vehicle.title%> Reviews</h2>
-  <ul>
-    <li><%=vehicle.reviews[0]%></li>
-    <li><%=vehicle.reviews[1]%></li>
-    <li><%=vehicle.reviews[2]%></li>
-    <li><%=vehicle.reviews[3]%></li>
-    <li><%=vehicle.reviews[4]%></li>
+  <h2><%=`${vehicle.inv_make} ${vehicle.inv_model}`%> Reviews</h2>
+  <ul class="reviewList">
+    <% for(var i in reviews) { %>
+    <li>
+      <p>"<%=reviews[i].review_text%>"</p>
+      <p><%=`-${reviews[i].account_firstname} ${reviews[i].account_lastname}` %></p>
+      <p><%=reviews[i].review_date%></p>
+    </li>
+    <% } %>
   </ul>
+  <% if (locals.loggedin) { %>
+  <form id="reviewForm" action="/inv/createReview" method="post">
+    <input type="hidden" id="accountId" name="account_id" value=<%=locals.accountData.account_id%> required>
+    <input type="hidden" id="invId" name="inv_id" value=<%=vehicle.inv_id%> required>
+    <label><%=screenname%>
+    <textarea rows="5" cols="140" id="reviewText" name="review_text" required></textarea>
+    <input type="submit" value="Submit" />
+  </form>
+  <% } else { %>
+  <a href="/account/login">Log in to submit a review</a>
+  <% } %>
 </div>

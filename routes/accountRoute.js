@@ -17,16 +17,13 @@ router.post(
   regValidate.checkLoginData,
   utilities.handleErrors(accountController.accountLogin)
 );
+router.get("/logout", utilities.handleErrors(accountController.logoutAccount))
 // Route to deliver register view
 router.get("/register", utilities.handleErrors(accountController.buildRegister));
 // Route to post registration information to db
 router.post("/register", regValidate.registationRules(), regValidate.checkRegData, utilities.handleErrors(accountController.registerAccount));
 
-// Process the login attempt
-router.post(
-   "/login",
-   regValidate.loginRules(),
-   regValidate.checkLoginData,
-   utilities.handleErrors(accountController.accountLogin))
+router.get("/update", utilities.handleErrors(accountController.updateAccount))
+router.post("/update", utilities.handleErrors(accountController.updateDetails))
 
 module.exports = router;

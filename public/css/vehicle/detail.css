@@ -11,3 +11,17 @@
 .vehicleDetailInfo {
    padding: 2%;
 }
+
+
+.vehicleReviews {
+   background-color: lightblue;
+}
+
+.vehicleReviews h2 {
+   background-color: antiquewhite;
+}
+
+.reviewList {
+   display: flex;
+   flex-direction: column;
+}

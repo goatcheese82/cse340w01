@@ -13,4 +13,31 @@
 </ul>
 <% } %>
 
-<h3>You're logged in!</h3>
+<% if (account.account_type == "Client") { %>
+<h2>Welcome <%=account.account_firstname%></h2>
+<% } else { %>
+<h2>Welcome <%=account.account_firstname%></h2>
+<h3>Inventory Management</h3>
+<p><a href="/inv/">Access</a></p>
+<p><a href="/account/update">Account Settings</a></p>
+
+<ul class="reviewList">
+  <% for(let i in reviews) { %>
+  <% let review = reviews[i]%>
+  <li>
+    <div class="reviewListInventory">
+      <image src=<%=review.inv_thumbnail%> alt="review.inv_model" />
+      <p><%= `${review.inv_make} ${review.inv_model}`%>
+    </div>
+    <div class="reviewListDetails">
+      <p>"<%=reviews[i].review_text%>"</p>
+      <p><%=reviews[i].review_date%></p>
+    </div>
+    <div class="reviewOptions">
+      <p><a href="/inv/updateReview/<%=review.review_id%>">Update</a></p>
+      <p><a href="/inv/deleteReview/<%=review.review_id%>">Delete</a></p>
+    </div>
+  </li>
+  <% } %>
+</ul>
+<% } %>

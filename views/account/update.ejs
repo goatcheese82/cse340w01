@@ -1,0 +1,33 @@
+<link rel="stylesheet" href="/css/account/login.css">
+<% if (title) { %>
+<h1><%= title %></h1>
+<% } else {
+  res.redirect('/')
+} %>
+
+<%- messages() %>
+
+<% if (errors) { %>
+<ul class="notice">
+  <% errors.array().forEach(error => { %>
+  <li><%= error.msg %></li>
+  <%  }) %>
+</ul>
+<% } %>
+
+<form id="updateAccountForm" action="/account/update" method="post">
+<input type="hidden" value=<%=account.account_id%>
+  <label for="account_firstname">First Name:</label>
+  <input type="text" name="account_firstname" id="accountFirstname" required value="<%= account.account_firstname %>">
+  <label for="account_lastname">Last Name:</label>
+  <input type="text" id="accountLastname" name="account_lastname" required value="<%= account.account_lastname%>">
+  <label for="account_email">Email:</label>
+  <input type="email" id="accountEmail" name="account_email" required value="<%= account.account_email%>">
+  <input type="submit" value="Update Account" />
+</form>
+
+<form id="updateAccountPassword" action="/account/update" method="post">
+<label for="account_password">Password:</label>
+<input type="hidden" id="accountId" name="account_id" value="account.account_password" required />
+<input type="password" id="accountPassword" name="account_password"  required />
+<input type="submit" value="Change Password" />

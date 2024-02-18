@@ -1,5 +1,6 @@
 const utilities = require('../utilities')
 const accountModel = require('../models/account-model')
+const revModel = require('../models/review-model')
 const bcrypt = require("bcryptjs")
 const jwt = require("jsonwebtoken")
 require("dotenv").config()
@@ -81,37 +82,79 @@ async function accountLogin(req, res) {
    const { account_email, account_password } = req.body
    const accountData = await accountModel.getAccountByEmail(account_email)
    if (!accountData) {
-    req.flash("notice", "Please check your credentials and try again.")
-    res.status(400).render("account/login", {
-     title: "Login",
-     nav,
-     errors: null,
-     account_email,
-    })
-   return
+      req.flash("notice", "Please check your credentials and try again.")
+      res.status(400).render("account/login", {
+         title: "Login",
+         nav,
+         errors: null,
+         account_email,
+      })
+      return
    }
    try {
-    if (await bcrypt.compare(account_password, accountData.account_password)) {
-    delete accountData.account_password
-    const accessToken = jwt.sign(accountData, process.env.ACCESS_TOKEN_SECRET, { expiresIn: 3600 * 1000 })
-    res.cookie("jwt", accessToken, { httpOnly: true, maxAge: 3600 * 1000 })
-    return res.redirect("/account")
-    }
+      if (await bcrypt.compare(account_password, accountData.account_password)) {
+         delete accountData.account_password
+         const accessToken = jwt.sign(accountData, process.env.ACCESS_TOKEN_SECRET, { expiresIn: 3600 * 1000 })
+         res.cookie("jwt", accessToken, { httpOnly: true, maxAge: 3600 * 1000 })
+         return res.redirect("/account")
+      }
    } catch (error) {
-    return new Error('Access Forbidden')
+      return new Error('Access Forbidden')
    }
-  }
+}
 
-  /* ****************************************
+async function logoutAccount(req, res) {
+   let nav = await utilities.getNav()
+   res.clearCookie("jwt")
+   res.render("./account/login", {
+      title: "Login",
+      nav
+   })
+}
+
+/* ****************************************
 *  Deliver account view
 * *************************************** */
 async function getIndex(req, res, next) {
    let nav = await utilities.getNav()
+   let account = res.locals.accountData
+   let reviews = await revModel.getReviewsByAccount(account.account_id)
+   console.log(reviews)
    res.render("account/index", {
       title: "Login",
       nav,
+      account,
+      reviews,
       errors: null
    })
 }
 
-module.exports = { buildLogin, buildRegister, registerAccount, accountLogin, getIndex }
+/* ****************************************
+*  View: Update Account
+* *************************************** */
+async function updateAccount(req, res, next) {
+   let nav = await utilities.getNav()
+   const account = res.locals.accountData
+   res.render("account/update", {
+      title: "Update Account",
+      nav,
+      account,
+      errors: null
+   })
+}
+
+/* ****************************************
+*  Action: Update Account Details
+* *************************************** */
+async function updateDetails(req, res, next) {
+   let nav = await utilities.getNav()
+   const account = res.locals.accountData
+   res.render("account/update", {
+      title: "Update Account",
+      nav,
+      account,
+      errors: null
+   })
+}
+
+module.exports = { buildLogin, buildRegister, registerAccount, accountLogin, getIndex, logoutAccount, updateAccount, updateDetails }

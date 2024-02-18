@@ -1,0 +1,19 @@
+<link rel="stylesheet" href="/css/account/login.css">
+<% if (title) { %>
+<h1><%= title %></h1>
+<% } else {
+  res.redirect('/')
+} %>
+
+<% if (errors) { %>
+<ul class="notice">
+  <% errors.array().forEach(error => { %>
+  <li><%= error.msg %></li>
+  <%  }) %>
+</ul>
+<% } %>
+
+  <form id="UpdateReviewForm" action="/inv/updateReview/<%review.review_id%>" method="post">
+    <textarea rows="5" cols="140" id="reviewText" name="review_text" value=<%=review.review_text%> required><%=review.review_text%></textarea>
+    <input type="submit" value="Submit" />
+  </form>

@@ -2,6 +2,7 @@
 const express = require("express")
 const router = new express.Router() 
 const invController = require("../controllers/invController");
+const revController = require("../controllers/reviewController");
 const { handleErrors } = require("../utilities");
 
 // Route to build inventory by classification view
@@ -28,6 +29,15 @@ router.post("/addInventory", handleErrors(invController.createVehicle));
 
 router.get("/deleteInventory/:inventoryId", handleErrors(invController.deleteInventoryView));
 router.post("/deleteInventory/:inventoryId", handleErrors(invController.deleteInventory));
+
+// Reviews
+
+router.get("/updateReview/:reviewId", handleErrors(revController.buildReviewUpdate));
+router.get("/deleteReview/:reviewId", handleErrors(revController.buildReviewUpdate));
+
+router.post("/createReview", handleErrors(revController.createReview));
+router.post("/updateReview/:reviewId", handleErrors(revController.updateReview));
+router.post("/deleteReview/:reviewId", handleErrors(revController.deleteReview));
 
 
 module.exports = router;

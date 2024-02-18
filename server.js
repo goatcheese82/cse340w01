@@ -5,19 +5,20 @@
 /* ***********************
  * Require Statements
  *************************/
+const express = require("express")
+const expressLayouts = require("express-ejs-layouts")
+const env = require("dotenv").config()
+const baseController = require("./controllers/baseController")
+const utilities = require("./utilities/")
 const session = require("express-session")
 const pool = require('./database/')
-const express = require("express")
-const env = require("dotenv").config()
-const app = express()
+const bodyParser = require("body-parser")
+const cookieParser = require("cookie-parser")
 const static = require("./routes/static")
 const inventoryRoute = require("./routes/inventoryRoute")
 const accountRoute = require("./routes/accountRoute")
-const expressLayouts = require("express-ejs-layouts")
-const baseController = require("./controllers/baseController")
-const utilities = require("./utilities/")
-const bodyParser = require("body-parser")
-const cookieParser = require("cookie-parser")
+
+const app = express()
 
 /* ***********************
  * Middleware
@@ -43,6 +44,8 @@ app.use(function(req, res, next){
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencoded
 
+app.use(cookieParser())
+app.use(utilities.checkJWTToken)
 
 /* ***********************
  * View Engine and Templates
@@ -68,6 +71,8 @@ app.use(async (req, res, next) => {
   next({status: 404, message: 'Sorry, we appear to have lost that page.'})
 })
 
+
+
 /* ***********************
 * Express Error Handler
 * Place after all other middleware
@@ -84,7 +89,6 @@ app.use(async (err, req, res, next) => {
   })
 })
 
-app.use(utilities.checkJWTToken)
 
 /* ***********************
  * Local Server Information
